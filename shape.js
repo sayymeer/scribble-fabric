@@ -324,6 +324,13 @@ function paintBucket(ev) {
     canvas.on('path:created', function(options) {      
         canvas.setActiveObject(options.path);
         var selectedPath = canvas.getActiveObject();  
+        var points = selectedPath.canvas.freeDrawingBrush._points;
+        var intPoint = []
+        points.forEach(function(point) {
+            intPoint.push({x:Math.round(point.x),y:Math.round(point.y)});
+        })
+        console.log(points);
+        console.log(intPoint);
         var img = new Image();
         img.onload = function() {
         var fabricImg = new fabric.Image(img, {
