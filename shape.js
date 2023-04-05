@@ -11,6 +11,7 @@ let bgColor = 'white';
 let colorLayerData=ctx.getImageData(0, 0, canvas.getWidth(), canvas.getHeight());
 let isPaintBucket = false;
 
+
 canvas.isDrawingMode = false;
 
 canvas.selectionColor = 'rgba(255, 255, 255, 0.3)';
