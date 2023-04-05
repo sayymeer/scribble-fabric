@@ -269,6 +269,17 @@ function AddTriangle(){
     Select();
 }
 
+function AddLine() {
+    var line = new fabric.Line([100, 100, 200, 200], {
+        stroke: 'black',
+        strokeWidth: 2,
+      });
+    canvas.add(line);
+    canvas.setActiveObject(line);
+    Select();
+}
+
+
 function AddSquare() {
     var rect = new fabric.Rect({
         left: 100,
