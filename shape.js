@@ -331,22 +331,5 @@ function paintBucket(ev) {
         })
         console.log(points);
         console.log(intPoint);
-        var img = new Image();
-        img.onload = function() {
-        var fabricImg = new fabric.Image(img, {
-            left: 100,
-            top: 100,
-            width: selectedPath.width,
-            height: selectedPath.height,
-            scaleX: selectedPath.scaleX,
-            scaleY: selectedPath.scaleY,
-            angle: selectedPath.angle,
-            originX: selectedPath.originX,
-            originY: selectedPath.originY
-        });
-        };
-        img.src = selectedPath.toDataURL();
-        let data = {imageURI: img.src,data:selectedPath};
-
   })      
 }
