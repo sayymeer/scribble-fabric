@@ -3,14 +3,16 @@ let isMarkerBrush = false;
 let isPenBrush = false;
 let isSprayBrush = false;
 let isCalligraphyBrush = false;
-let isHighlighter = true;
-canvas.isDrawingMode = true;
+let isHighlighter = false;
+let isTextbox = false;
 
 function AllBrushOff(){
     isMarkerBrush = false;
     isPenBrush = false;
     isSprayBrush = false;
     isCalligraphyBrush = false;
+    isHighlighter = false;
+    isTextbox = false;
 }
 
 function penDraw() {
@@ -29,6 +31,28 @@ function sprayDraw() {
     AllBrushOff();
     isSprayBrush = true;
     Draw();
+}
+
+function highlightDraw() {
+    AllBrushOff();
+    isHighlighter = true;
+    Draw()
+}
+
+function textBox() {
+    canvas.on('mouse:down',function(ev) {
+    var textbox = new fabric.Textbox('Enter text here', {
+        left: ev.pointer.x,
+        top: ev.pointer.y,
+        width: 200,
+        fontSize: 20
+    });
+    
+    canvas.add(textbox);
+    canvas.setActiveObject(textbox);
+    AllBrushOff();
+    Select();
+    })
 }
 
 
@@ -93,8 +117,8 @@ function Draw() {
     PenBrush.width = strokeWidth;
 
     let highlighterBrush = new fabric.PencilBrush(canvas);
-    highlighterBrush.color = 'yellow'; // set highlighter color
-    highlighterBrush.width = 10; // set highlighter width
+    highlighterBrush.color = 'rgb(255,255,0,0.4)'; // set highlighter color
+    highlighterBrush.width = 13; // set highlighter width
 
     let sprayBrush = new fabric.SprayBrush(canvas);
     sprayBrush.width = 20; // Set the width of the spray brush
@@ -123,7 +147,4 @@ function Draw() {
         canvas.freeDrawingBrush = highlighterBrush;
 
     }
-
-    canvas.freeDrawingBrush.color = strokeColor;
-    canvas.freeDrawingBrush.width = strokeWidth;
 }
