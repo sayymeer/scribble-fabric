@@ -1,8 +1,36 @@
 
 let isMarkerBrush = false;
-let isPenBrush = true;
+let isPenBrush = false;
 let isSprayBrush = false;
 let isCalligraphyBrush = false;
+let isHighlighter = true;
+canvas.isDrawingMode = true;
+
+function AllBrushOff(){
+    isMarkerBrush = false;
+    isPenBrush = false;
+    isSprayBrush = false;
+    isCalligraphyBrush = false;
+}
+
+function penDraw() {
+    AllBrushOff();
+    isPenBrush = true;
+    Draw();
+}
+
+function markerDraw() {
+    AllBrushOff();
+    isMarkerBrush = true;
+    Draw();
+}
+
+function sprayDraw() {
+    AllBrushOff();
+    isSprayBrush = true;
+    Draw();
+}
+
 
 fabric.CalligraphyBrush = fabric.util.createClass(fabric.PencilBrush, {
     initialize: function(canvas) {
@@ -58,11 +86,15 @@ function Draw() {
     let markerBrush = new fabric.PencilBrush(canvas);
     markerBrush.color = strokeColor;
     markerBrush.width = (3+strokeWidth);
-    markerBrush.shadow = new fabric.Shadow({ blur: 0, offsetX: 0, offsetY: 0, color: strokeColor });
+    markerBrush.shadow = new fabric.Shadow({ blur: 3, offsetX: 0, offsetY: 0, color: strokeColor });
 
     let PenBrush = new  fabric.PencilBrush(canvas);
     PenBrush.color = strokeColor;
     PenBrush.width = strokeWidth;
+
+    let highlighterBrush = new fabric.PencilBrush(canvas);
+    highlighterBrush.color = 'yellow'; // set highlighter color
+    highlighterBrush.width = 10; // set highlighter width
 
     let sprayBrush = new fabric.SprayBrush(canvas);
     sprayBrush.width = 20; // Set the width of the spray brush
@@ -86,6 +118,10 @@ function Draw() {
     }
     if (isCalligraphyBrush) {
         canvas.freeDrawingBrush = calligraphyBrush;
+    }
+    if (isHighlighter) {
+        canvas.freeDrawingBrush = highlighterBrush;
+
     }
 
     canvas.freeDrawingBrush.color = strokeColor;

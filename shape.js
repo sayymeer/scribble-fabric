@@ -320,9 +320,6 @@ function paintBucket(ev) {
     canvas.on('path:created', function(options) {      
         // Select the created path
         canvas.setActiveObject(options.path);
-        let data = canvas.getActiveObject().canvas.freeDrawingBrush._points;
-        console.log(data);
-      });
-
-      
-    }
+        let points = canvas.getActiveObject().canvas.freeDrawingBrush._points;
+  })      
+}
