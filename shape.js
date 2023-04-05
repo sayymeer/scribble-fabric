@@ -22,7 +22,7 @@ fabric.Object.prototype.transparentCorners = false;
 fabric.Object.prototype.cornerColor = 'blue';
 fabric.Object.prototype.cornerStyle = 'square';
 fabric.Object.prototype.noScaleCache = false;
-
+fabric.Object.prototype.cornerSize = 8;
 
 document.getElementById('strokeColor').addEventListener('input',function(e){
     strokeColor = e.target.value;
@@ -73,8 +73,10 @@ function paintBucketOn() {
 }
 
 function Select() {
+    AllBrushOff()
     canvas.isDrawingMode = false;
     isPaintBucket = false;
+    myCanvas.style.cursor = 'default'
 }
 
 function Erase() {

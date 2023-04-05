@@ -40,19 +40,17 @@ function highlightDraw() {
 }
 
 function textBox() {
-    canvas.on('mouse:down',function(ev) {
     var textbox = new fabric.Textbox('Enter text here', {
-        left: ev.pointer.x,
-        top: ev.pointer.y,
+        left: 100,
+        top: 100,
         width: 200,
-        fontSize: 20
+        fontSize: 20,
+        editingBorderColor: 'rgb(0,0,255)'
     });
-    
     canvas.add(textbox);
     canvas.setActiveObject(textbox);
     AllBrushOff();
     Select();
-    })
 }
 
 
