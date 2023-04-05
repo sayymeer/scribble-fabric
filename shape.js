@@ -69,14 +69,6 @@ document.getElementById('strokeWidth').addEventListener('input',function(e){
 function paintBucketOn() {
     Select();
     isPaintBucket = true;
-
-}
-
-function Draw() {    
-    canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
-    canvas.freeDrawingBrush.color = strokeColor;
-    canvas.freeDrawingBrush.width = strokeWidth;
-    canvas.isDrawingMode = true;
 }
 
 function Select() {
@@ -97,6 +89,7 @@ function Copy() {
 	canvas.getActiveObject().clone(function(cloned) {
 		_clipboard = cloned;
 	});
+   
 }
 
 function Paste() {
@@ -315,3 +308,21 @@ function paintBucket(ev) {
       canvas.setBackgroundColor(fillColor, canvas.renderAll.bind(canvas));
     }
   }
+
+
+
+  function shapeAutocomplete() {
+    canvas.isDrawingMode = true;
+    canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+    canvas.freeDrawingBrush.width = 3;
+
+    canvas.freeDrawingBrush.
+    canvas.on('path:created', function(options) {      
+        // Select the created path
+        canvas.setActiveObject(options.path);
+        let data = canvas.getActiveObject().canvas.freeDrawingBrush._points;
+        console.log(data);
+      });
+
+      
+    }
