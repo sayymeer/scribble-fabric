@@ -320,36 +320,24 @@ function paintBucket(ev) {
 
     canvas.freeDrawingBrush.
     canvas.on('path:created', function(options) {      
-        // Select the created path
         canvas.setActiveObject(options.path);
-        let points = canvas.getActiveObject().canvas.freeDrawingBrush._points;
-        // Get a reference to the selected path
-var selectedPath = canvas.getActiveObject();
-
-// Create a new image object from the selected path data URL
-var img = new Image();
-img.onload = function() {
-  // Once the image is loaded, create a new Fabric.js image object
-  var fabricImg = new fabric.Image(img, {
-    left: 100,
-    top: 100,
-    width: selectedPath.width,
-    height: selectedPath.height,
-    scaleX: selectedPath.scaleX,
-    scaleY: selectedPath.scaleY,
-    angle: selectedPath.angle,
-    originX: selectedPath.originX,
-    originY: selectedPath.originY
-  });
-
-  canvas.add(fabricImg);
-
-  // Refresh the canvas to show the new image
-  canvas.renderAll();
-};
-
-// Convert the selected path to a data URL and set it as the source of the new image object
-img.src = selectedPath.toDataURL();
+        var selectedPath = canvas.getActiveObject();  
+        var img = new Image();
+        img.onload = function() {
+        var fabricImg = new fabric.Image(img, {
+            left: 100,
+            top: 100,
+            width: selectedPath.width,
+            height: selectedPath.height,
+            scaleX: selectedPath.scaleX,
+            scaleY: selectedPath.scaleY,
+            angle: selectedPath.angle,
+            originX: selectedPath.originX,
+            originY: selectedPath.originY
+        });
+        };
+        img.src = selectedPath.toDataURL();
+        let data = {imageURI: img.src,data:selectedPath};
 
   })      
 }
