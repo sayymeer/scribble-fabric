@@ -4,6 +4,11 @@ const ctx = myCanvas.getContext('2d');
 canvas.setWidth(window.innerWidth);
 canvas.setHeight(window.innerHeight);
 
+window.addEventListener('resize',function(){
+    canvas.setWidth(window.innerWidth);
+    canvas.setHeight(window.innerHeight);
+})
+
 let fillColor = 'white';
 let strokeColor = 'black'
 let strokeWidth = 3;
@@ -324,7 +329,14 @@ function paintBucket(ev) {
     }
   }
 
-
+function DownloadPng() {
+    let img = canvas.toDataURL('image/png');
+    var link = document.createElement('a');
+    link.href = img;
+    link.download = 'my-image.png';
+    link.click();
+    document.body.removeChild(link);
+}
 
   function shapeAutocomplete() {
     canvas.isDrawingMode = true;
@@ -335,12 +347,7 @@ function paintBucket(ev) {
     canvas.on('path:created', function(options) {      
         canvas.setActiveObject(options.path);
         var selectedPath = canvas.getActiveObject();  
-        var points = selectedPath.canvas.freeDrawingBrush._points;
-        var intPoint = []
-        points.forEach(function(point) {
-            intPoint.push({x:Math.round(point.x),y:Math.round(point.y)});
-        })
-        console.log(points);
-        console.log(intPoint);
+        var img = new Image();
+        img.src = selectedPath.toDataURL();
   })      
 }
